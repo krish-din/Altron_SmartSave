@@ -36,8 +36,7 @@ class Catalog():
                             hstip = ip.ip
                             break
                     break
-#            return("192.168.21.238")
-            return(socket.gethostbyname(socket.gethostname()))
+            return socket.gethostbyname(socket.gethostname())
             #return(hstip)
         else:
             return("127.0.0.1")
