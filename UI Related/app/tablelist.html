@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="assets/img/favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>IoT Project | Altron Team</title>
+
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="assets/css/deviceAdd.css">
+    <!-- Bootstrap core CSS     -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Animation library for notifications   -->
+    <link href="assets/css/animate.min.css" rel="stylesheet"/>
+    <!--  Light Bootstrap Table core CSS    -->
+    <link href="assets/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>
+    <!-- Bootstrap-Switch -->
+    <link href="assets/css/bootstrap-switch.css" rel="stylesheet">
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <style>
+        tr.spaceUnder>td {
+            padding-bottom: 0.1em;
+            }
+    }
+    </style>
+    <script>
+        function closeForm() {
+            $(':input:visible').attr('disabled', false);
+            document.getElementById("plugEditForm").style.display="none";
+            document.getElementById("tempEditForm").style.display="none";
+            document.getElementById("pirEditForm").style.display="none";
+        }
+    </script>
+    
+    <script type="text/javascript" src="assets/js/plugsTableCall.js"></script>
+    <script type="text/javascript" src="assets/js/tempTableCall.js"></script>
+    <script type="text/javascript" src="assets/js/pirTableCall.js"></script>
+    
+
+</head>
+<body>
+    
+    <div class="wrapper">
+        <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="#" class="simple-text">
+                        Altron Project <i class="pe-7s-rocket"></i>
+                    </a>
+                </div>
+
+                <ul class="nav">
+                    <li>
+                        <a href="index.html">
+                            <i class="pe-7s-graph"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="tablelist.html">
+                            <i class="pe-7s-note2"></i>
+                            <p>Preferences</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="main-panel">
+          <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Preferences</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                         <a href="/logout">
+                             Sign out <i class="fa fa-arrow-circle-right"></i>
+                         </a>
+                     </li>
+                 </ul>
+             </div>
+            </div>
+        </nav>
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Devices</h4>
+                                
+                                <p class="category">Plugs information table</p>
+                                <label class="form-inline pull-right" for="error" id = "updateError" style="display: none;"><b>Sorry,backend call Failed! Try Later</b></label>    
+                            </div>
+                            
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover table-striped"id="plugs_data_table" align="center">
+                                    <thead>
+                                        <!-- <th class="select-checkbox sorting_disabled"></th> -->
+                                        <th style="width: 80px;">devID</th>
+                                        <th style="width: 180px;">Name</th>
+                                        <th style="width: 80px;">Presence</th>
+                                        <th style="width: 80px;">Control</th>
+                                        <th style="width: 80px;">Restart</th>
+                                        <th style="width: 80px;">Room</th>
+                                        <th style="width: 180px;">Address</th>
+                                        <th style="width: 80px;">Brand</th>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+
+                                <div class="header">
+                                    <p class="category">Temperature Sensors information table</p>    
+                                    <label class="form-inline pull-right" for="error" id = "tempupdateError" style="display: none;"><b>Sorry,backend call Failed! Try Later</b></label>                               
+                                </div>
+                                
+                            
+                                <table class="table table-hover table-striped"id="temp_data_table" align="center">
+                                    <thead>
+                                        <!-- <th class="select-checkbox sorting_disabled"></th> -->
+                                        <th style="width: 80px;">devID</th>
+                                        <th style="width: 180px;">Name</th>
+                                        <th style="width: 80px;">Room</th>
+                                        <th style="width: 80px;">GPIO</th>                                        
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+
+                                <div class="header">
+                                    <p class="category">PIR Sensors information table</p>    
+                                    <label class="form-inline pull-right" for="error" id = "pirupdateError" style="display: none;"><b>Sorry,backend call Failed! Try Later</b></label>                               
+                                </div>
+                                
+                            
+                                <table class="table table-hover table-striped"id="pir_data_table" align="center">
+                                    <thead>
+                                        <!-- <th class="select-checkbox sorting_disabled"></th> -->
+                                        <th style="width: 80px;">devID</th>
+                                        <th style="width: 180px;">Name</th>
+                                        <th style="width: 80px;">Room</th>
+                                        <th style="width: 80px;">GPIO</th>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>    
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Services</h4>
+                                
+                                <p class="category">Services Information</p>
+                                <label class="form-inline pull-right" for="error" id = "serviceError" style="display: none;"><b>Sorry,backend call Failed! Try Later</b></label>    
+                            </div>
+                            <div class="alert alert-success" id="success-alert" style="display: none;">
+                                <button type="button" class="close" data-dismiss="alert">x</button>
+                                <strong>Success! </strong> Updated.
+                            </div>
+
+                            <div class="row" style="padding-left: 5%;padding-top: 5%;">
+                                <div class="col-md-4">
+                                    <p>Monthly cap</p>
+                                </div>
+                                <div class="col-md-6" >
+                                    <input type="number" min="0" name="mymonthCAP" id="mymonthCAP" required> 
+                                </div>
+                                <div>
+                                    <button id="mymonthCAPbutton" onclick="monthCAP(this)" class="btn btn-round btn-sm my-0 btn-fill">Update</button>
+                                </div>
+                            </div>
+
+                            <div class="row" style="padding-left: 5%;">
+                                <div class="col-md-4">
+                                    <p>Temperature</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="number" min="18" name="mytemperature" id="mytemperature" required> 
+                                </div>
+                                <div>
+                                    <button id="mytemperaturebutton" onclick="temperature(this)" class="btn btn-round btn-sm my-0 btn-fill">Update</button>
+                                </div>
+                            </div>
+
+                            <div class="row" style="padding-left: 5%;">
+                                <div class="col-md-4">
+                                    <p>Temperature Frequency</p>
+                                </div>
+                                <div class="col-md-6" >
+                                    <input type="number" min="5" max="15" step="5" name="mytemperatureFEQ" id="mytemperatureFEQ" required> 
+                                </div>
+                                <div>
+                                    <button id="mytemperatureFEQbutton" onclick="temperatureFEQ(this)" class="btn btn-round btn-sm my-0 btn-fill">Update</button>
+                                </div>
+                            </div>
+
+                            <div class="row" style="padding-left: 5%;">
+                                <div class="col-md-4">
+                                    <p>Plug Frequency</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="number" min="5" max="15" step="5" name="myplugFEQ" id="myplugFEQ" required> 
+                                </div>
+                                <div>
+                                    <button id = "myplugFEQbutton" onclick="plugFEQ(this)" class="btn btn-round btn-sm my-0 btn-fill">Update</button>
+                                </div>
+                            </div>
+
+                            <div class="row" style="padding-left: 5%;">
+                                <div class="col-md-4">
+                                    <p>Motion Sensor Frequency</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="number" min="5" max="15" step="5" name="mymsensorFEQ" id="mymsensorFEQ" required> 
+                                </div>
+                                <div>
+                                    <button id = "mymsensorFEQbutton" onclick="msensorfrq(this)" class="btn btn-round btn-sm my-0 btn-fill">Update</button>
+                                </div>
+                            </div>
+
+                            <div class="row" style="padding-left: 5%;">
+                                <div class="col-md-4">
+                                    <p>Telegram User</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <form>
+                                        <input type="text" id="addTelegramUser" class="form-control" placeholder="Insert Telegram account" rows="1" value=""/>
+                                    </form>
+                                </div>
+                                <div>
+                                    <!-- <input type="button" class="add btn btn-success btn-round btn-fill" onclick="addUser();" value="+" style="font-weight: bold; font-size: 20px;">  -->
+                                    <button type="submit" id="addTelegramUserButton" class="add btn btn-success btn-round btn-fill" value="+" style="font-weight: bold; font-size: 20px;" onclick="addTelegramUser()">+</button>
+                                </div>
+                            </div>
+                            <br/>
+                        </div>
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Power Cost</h4>
+                                
+                                <p class="category">Cost-Hour table(Cost per KWh)</p>
+                                <label class="form-inline pull-right" for="error" id = "serviceError" style="display: none;"><b>Sorry,backend call Failed! Try Later</b></label>    
+                                <label class="form-inline pull-right" for="error" id = "warning" style="display: inline;"><b>Inclusive From and To</b></label> 
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-hover table-striped"id="costDataTableUser" >
+                                    <thead>
+                                        <!-- <th class="select-checkbox sorting_disabled"></th> -->
+                                        <th style="width: 80px;">From(Hour)</th>
+                                        <th style="width: 80px;">To(Hour)</th>
+                                        <th style="width: 80px;">Cost(in € for 1 KWh)</th>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="edit-popup">
+                    <div class="form-popup" id="plugEditForm">
+                        <form class="form-container">                        
+                         <h3>Update Device</h3>
+                          <label for="deviceID"><b>Device ID</b></label>
+                          <input type="text" name="plugdevID" id="plugdevID" disabled value="" required>
+
+                          <label for="deviceName"><b>Device Name</b></label>
+                          <input type="text" name="plugdevName" id="plugdevName" required>
+
+                          <label for="presence"><b>Presence</b></label>
+                          <input class="binaryOnly" type="number" min="0" max="1" name="plugpresence" id="plugpresence" required>
+
+                          <label for="Control"><b>Control</b></label>
+                          <input class="binaryOnly" type="number" min="0" max="1" name="plugcontrol" id="plugcontrol" required>
+
+                          <label for="Restart"><b>Restart</b></label>
+                          <input class="binaryOnly" type="number" min="0" max="1" name="plugrestart" id="plugrestart" required>
+
+                          <label for="Room"><b>Room Number</b></label>
+                          <input type="number" name="plugroom" min="0" id="plugroom" required>
+
+                          <label for="MAC"><b>Plug Address</b></label>
+                          <input type="text" name="plugmac" id="plugmac" required> 
+                          
+                          <label for="brand"><b>Plug Brand</b></label>
+                          <fieldset class="dropdown">
+                            <select class="custom-select custom-select-sm" id="branddropdown">
+                                <option value = "DL">DLink</option>
+                                <option value = "PW">Plugwise</option>                                
+                            </select>
+                            </fieldset>
+                      
+                          <button type="button" id="plugUpdatebutton" class="btn">Update</button>
+                          <label for="error" id = "empty" data-color="red" style="display: none;"><b>* Enter all values</b></label>
+                          <button type="button" class="btn cancel" id="canclebutton" onclick="closeForm()">Cancel</button>
+                          
+                        </form>
+                      </div> 
+                    </div>
+                    <div class="edit-popup">
+                        <div class="form-popup" id="tempEditForm">
+                            <form class="form-container">                        
+                             <h3>Update Device</h3>
+                              <label for="deviceID"><b>Device ID</b></label>
+                              <input type="text" name="tempdevID" id="tempdevID" disabled value="" required>
+    
+                              <label for="deviceName"><b>Device Name</b></label>
+                              <input type="text" name="tempdevName" id="tempdevName" required>
+    
+                              <label for="Room"><b>Room Number</b></label>
+                              <input type="number" name="temproom" min="0" id="temproom" required>
+
+                              <label for="GPIO"><b>GPIO</b></label>
+                              <input type="number" name="tempGPIO" min="0" id="tempGPIO" disabled>
+    
+                              <button type="button" id="tempUpdatebutton" class="btn">Update</button>
+                              <label for="error" id = "tempempty" data-color="red" style="display: none;"><b>* Enter all values</b></label>
+                              <button type="button" class="btn cancel" id="canclebutton1" onclick="closeForm()">Cancel</button>
+                              
+                            </form>
+                          </div> 
+                    </div>    
+                    <div class="edit-popup">
+                        <div class="form-popup" id="pirEditForm">
+                            <form class="form-container">                        
+                             <h3>Update Device</h3>
+                              <label for="deviceID"><b>Device ID</b></label>
+                              <input type="text" name="pirdevID" id="pirdevID" disabled value="" required>
+    
+                              <label for="deviceName"><b>Device Name</b></label>
+                              <input type="text" name="pirdevName" id="pirdevName" required>
+    
+                              <label for="Room"><b>Room Number</b></label>
+                              <input type="number" name="pirroom" min="0" id="pirroom" required>
+
+                              <label for="GPIO"><b>GPIO</b></label>
+                              <input type="number" name="pirGPIO" min="0" id="pirGPIO" disabled>
+    
+                              <button type="button" id="pirUpdatebutton" class="btn">Update</button>
+                              <label for="error" id = "pirempty" data-color="red" style="display: none;"><b>* Enter all values</b></label>
+                              <button type="button" class="btn cancel" id="canclebutton2" onclick="closeForm()">Cancel</button>
+                              
+                            </form>
+                          </div> 
+                    </div>                 
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <nav class="pull-left">
+                </nav>
+                <p class="copyright pull-right">
+                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="#">Altron Team</a> <i class="pe-7s-gleam"></i> | IoT Programming
+                </p>
+            </div>
+        </footer>
+    </div>
+</div>
+</div>
+
+
+</body>
+
+<!--   Core JS Files   -->
+<script src="assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+<script src="assets/js/popDevicetable.js" type="text/javascript"></script>
+<script src="assets/js/popServices.js"></script>
+<script src="assets/js/popCostTableUser.js"></script>
+<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+<!--  Charts Plugin -->
+<script src="assets/js/chartist.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="assets/js/bootstrap-notify.js"></script>
+<!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+<script src="assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
+<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+<script src="assets/js/demo.js"></script>
+<!-- Bootstrap-Switch -->
+<script src="assets/js/bootstrap-switch.js"></script>
+<script src="assets/js/plugsTableCall.js"></script>
+<script src="assets/js/tempTableCall.js"></script>
+<script type="text/javascript" src="assets/js/pirTableCall.js"></script>
+
+<!-- <script src="assets/js/text_editable.js"></script> -->
+<script src="assets/js/serviceUpdates.js"></script>
+
+</html>

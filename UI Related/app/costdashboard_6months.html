@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>IoT Project | Altron Team</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+
+    <!-- Bootstrap core CSS     -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Animation library for notifications   -->
+    <link href="assets/css/animate.min.css" rel="stylesheet"/>
+
+    <!--  Light Bootstrap Table core CSS    -->
+    <link href="assets/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>
+
+    <!-- Bootstrap-Switch -->
+    <link href="assets/css/bootstrap-switch.css" rel="stylesheet">
+
+    <!--  Custom CSS -->
+    <link href="assets/css/custom.css" rel="stylesheet">
+    <link href="assets/css/chartist.css" rel="stylesheet">
+
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
+         <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    Altron Project <i class="pe-7s-rocket"></i>
+                </a>
+            </div>
+            <ul class="nav">
+                <li class="active">
+                    <a href="index.html">
+                        <i class="pe-7s-graph"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="tablelist.html">
+                        <i class="pe-7s-note2"></i>
+                        <p>Preferences</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Dashboard</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                           <a href="/logout">
+                               Sign out <i class="fa fa-arrow-circle-right"></i>
+                           </a>
+                       </li>
+                       <li class="separator hidden-lg hidden-md"></li>
+                   </ul>
+               </div>
+           </div>
+       </nav>
+
+
+       <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">Cost</h4>
+                            <p class="category">24 Hours performance</p>
+                        </div>
+                        <div class="content">
+                            <canvas id="costChart"></canvas>
+                            <div class="footer" align="center">
+                                <div class="legend">
+                                    <div class="row"> 
+                                        <div class="btn-group">
+                                            <a href="dashboard_24hours.html">
+                                                <button class="btn btn-default btn-fill">
+                                                    <i class="fa fa-circle text-info"></i> 24 Hours  
+                                                </button>
+                                            </a>
+
+                                            <a href="dashboard_7days.html">
+                                                <button class="btn btn-default btn-fill">
+                                                    <i class="fa fa-circle text-danger"></i> Last 7 days
+                                                </button>
+                                            </a>
+
+                                            <a href="dashboard_3weeks.html">
+                                                <button class="btn btn-default btn-fill">
+                                                    <i class="fa fa-circle text-warning"></i> Last 3 weeks
+                                                </button>
+                                            </a>
+
+                                            <a href="dashboard_6months.html">
+                                                <button class="btn btn-default btn-fill">
+                                                    <i class="fa fa-circle text-success"></i> 6 months
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="stats">
+                                    <!-- <i class="fa fa-history"></i> Updated 3 minutes ago -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">Plugs</h4>
+                            <p class="category">Plug Status</p>
+                        </div>
+                        <div class="content">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <h5 style="text-align: center;">Plug 1</h5>
+                                </div>
+                                <div class="col-sm-8" style="text-align: left;">
+                                    <label class="switch">
+                                        <input type="checkbox" id="togBtn">
+                                        <div class="slider round">
+                                            <span class="on">Yes</span>
+                                            <span class="off">No</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <h5 style="text-align: center;">Plug 2</h5>
+                                </div>
+                                <div class="col-sm-8" style="text-align: left;">
+                                    <label class="switch">
+                                        <input type="checkbox" id="togBtn">
+                                        <div class="slider round">
+                                            <span class="on">Yes</span>
+                                            <span class="off">No</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="footer">
+                                <hr>
+                                <div class="stats">
+                                    <!-- <i class="fa fa-clock-o"></i> Campaign sent 2 days ago -->
+                                    <div class="legend">
+                                        <i class="fa fa-circle text-success"></i> Stay
+                                        <i class="fa fa-circle text-danger"></i> Leave
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- graph for power -->
+                <div class="col-md-8">
+                    <div class="card">
+                        <ul class="nav nav-item navbar-right" style="margin-right: 25px; padding-top: 10px;">
+                                <!-- <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <p>Plug <i class="fa fa-plug"></i>
+                                            <b class="caret hidden-sm hidden-xs"></b>
+                                        </p>
+                                    </a>
+                                    <ul class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 49px, 0px); top: 0px; left: -80px; will-change: transform;">
+                                        <li><a class="dropdown-item" href="index.html">Plug 1</a></li>
+                                        <li><a class="dropdown-item" href="index.html">Plug 2</a></li>
+                                        <li><a class="dropdown-item" href="index.html">Plug 3</a></li>
+                                        <li><a class="dropdown-item" href="index.html">Plug 4</a></li>
+                                    </ul>
+                                </li> -->
+
+                                <fieldset class="dropdown">
+                                    <select class="custom-select custom-select-sm">
+                                        <option value = "#FFFFFF">Plug 1</option>
+                                        <option value = "#FF0000">Plug 2</option>
+                                        <option value = "#FFCC00">Plug 3</option>
+                                        <option value = "#FFFF00">Plug 4</option>
+                                    </select>
+                                </fieldset>
+                            </ul>
+                            <div class="header">
+                                <h4 class="title">Power Usage</h4>
+                                <p class="category">6 Months performance</p>
+                            </div>
+                            <div class="content">
+                                <!--div id="chartActivity" class="ct-chart"></div-->
+                                <canvas id="barChart"></canvas>
+                                <div class="footer" align="center">
+                                    <div class="legend">
+                                        <div class="row"> 
+                                            <div class="btn-group">
+                                                <a href="dashboard_24hours.html">
+                                                    <button class="btn btn-default btn-fill">
+                                                        <i class="fa fa-circle text-info"></i> 24 Hours  
+                                                    </button>
+                                                </a>
+                                                
+                                                <a href="dashboard_7days.html">
+                                                    <button class="btn btn-default btn-fill">
+                                                        <i class="fa fa-circle text-danger"></i> Last 7 days
+                                                    </button>
+                                                </a>
+                                                
+                                                <a href="dashboard_3weeks.html">
+                                                    <button class="btn btn-default btn-fill">
+                                                        <i class="fa fa-circle text-warning"></i> Last 3 weeks
+                                                    </button>
+                                                </a>
+
+                                                <a href="dashboard_6months.html">
+                                                    <button class="btn btn-default btn-fill">
+                                                        <i class="fa fa-circle text-success"></i> 6 months
+                                                    </button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="stats">
+                                        <!-- <i class="fa fa-history"></i> Updated 3 minutes ago -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- switch on/off for sensor -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Motion Sensor</h4>
+                                <p class="category">Sensor Status</p>
+                            </div>
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h5 style="text-align: center;">Sensor 1</h5>
+                                    </div>
+                                    <div class="col-sm-8" style="text-align: left;">
+                                        <label class="switch">
+                                            <input type="checkbox" id="togBtn">
+                                            <div class="slider round">
+                                                <span class="on">Yes</span>
+                                                <span class="off">No</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                    <!-- <input class="btn btn-fill btn-round btn-success btn-sm" style="width: 22%;" id="" /> -->
+                                    <!-- <img src="http://site-to-check.com/online.png" alt="status" onerror="this.src='files/offline.png'" /> //correct form but server was shut down--> 
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h5 style="text-align: center;">Sensor 2</h5>
+                                    </div>
+                                    <div class="col-sm-8" style="text-align: left;">
+                                        <label class="switch">
+                                            <input type="checkbox" id="togBtn">
+                                            <div class="slider round">
+                                                <span class="on">Yes</span>
+                                                <span class="off">No</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                            <div class="footer">
+                                <hr>
+                                <div class="stats">
+                                    <!-- <i class="fa fa-clock-o"></i> Campaign sent 2 days ago -->
+                                    <div class="legend">
+                                        <i class="fa fa-circle text-success"></i> ON
+                                        <i class="fa fa-circle text-danger"></i> OFF
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+             <div class="col-md-8">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Temperature Sensor</h4>
+                        <p class="category">Yearly performance</p>
+                    </div>
+                    <div class="content">
+                        <!-- div id="chartHours" class="ct-chart"></div -->
+                        <canvas id="lineChart"></canvas>
+                        <div class="footer">
+                            <div class="legend">
+                                <br>
+                            </div>
+                            <div class="legend pull-right">
+                                        <!-- i class="fa fa-circle text-info"></i> Info 1
+                                        <i class="fa fa-circle text-danger"></i> Info 2
+                                        <i class="fa fa-circle text-warning"></i -->
+                                        </div>
+                                        <hr>
+                                        <div class="stats">
+                                            <!-- <i class="fa fa-history"></i> Updated 3 minutes ago -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <nav class="pull-left">
+                    </nav>
+                    <p class="copyright pull-right">
+                        &copy; <script>document.write(new Date().getFullYear())</script> <a href="#">Altron Team</a> <i class="pe-7s-gleam"></i> | IoT Programming
+                    </p>
+                </div>
+            </footer>
+
+        </div>
+    </div>
+
+
+</body>
+
+<!--   Core JS Files   -->
+<script src="assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+
+<!--  Charts Plugin -->
+<script src="assets/js/chartist.min.js"></script>
+<script src="assets/js/chartjs.min.js"></script>
+
+<!--  Notifications Plugin    -->
+<script src="assets/js/bootstrap-notify.js"></script>
+
+<!--  Google Maps Plugin    -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+
+<!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+<script src="assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
+
+<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+<script src="assets/js/demo.js"></script>
+
+<!-- Bootstrap-Switch -->
+<script src="assets/js/bootstrap-switch.js"></script>
+
+<!--  ChartJS  -->
+<script src="assets/js/chartist.js"></script>
+
+<script src="assets/js/demo.js"></script>
+<script src="assets/js/vendor/jquery-2.1.4.min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/plugins.js"></script>
+<script src="assets/js/main.js"></script>
+<!--  Chart js -->
+<script src="assets/js/lib/chart-js/Chart.bundle.js"></script>
+<script src="assets/js/lib/chart-js/chartjs-init.js"></script>
+
+<script src="assets/js/cost_barchart6months.js"></script>
+<script src="assets/js/barchart_6months.js"></script>
+<script src="assets/js/linechart.js"></script>
+
+
+</html>
