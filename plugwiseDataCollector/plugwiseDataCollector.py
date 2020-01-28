@@ -28,6 +28,7 @@ class MyMQTT:
     def myPublish(self, plug_id, pw_name, pw_data):
         pw_topic = 'house/' + str(self.houseID) + '/plugwise/' + plug_id + '/rwpower'
         js = {"Appliance_Name": pw_name, "value": pw_data}
+        print(js)
         self._paho_mqtt.publish(pw_topic, json.dumps(js), 2)
 
     def mySubscribe(self, topicSub, qos=2):
