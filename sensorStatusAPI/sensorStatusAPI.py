@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Nov 10 04:01:43 2019
-
-@author: cyril
-"""
 import json
 from datetime import datetime
 import time
