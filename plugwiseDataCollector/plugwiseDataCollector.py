@@ -5,6 +5,7 @@ import paho.mqtt.client as MQTT
 import requests
 from pyW215.pyW215 import SmartPlug, ON, OFF
 import plugwise as pw
+import sys, glob, serial
 
 # MQTT broker
 class MyMQTT:
@@ -88,6 +89,34 @@ class pwDataCollector:
             self.restartSystem = 0
             self.collect_data()
 
+    def serial_ports(self):
+        """ Lists serial port names
+
+            :raises EnvironmentError:
+                On unsupported or unknown platforms
+            :returns:
+                A list of the serial ports available on the system
+        """
+        if sys.platform.startswith('win'):
+            ports = ['COM%s' % (i + 1) for i in range(256)]
+        elif sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
+            # this excludes your current terminal "/dev/tty"
+            ports = glob.glob('/dev/tty[A-Za-z]*')
+        elif sys.platform.startswith('darwin'):
+            ports = glob.glob('/dev/tty.*')
+        else:
+            raise EnvironmentError('Unsupported platform')
+
+        result = []
+        for port in ports:
+            try:
+                s = serial.Serial(port)
+                s.close()
+                result.append(port)
+            except (OSError, serial.SerialException):
+                pass
+        return result
+
     # getting plug details
     def deviceConfigurations(self):
         # Device Details
@@ -157,7 +186,11 @@ class pwDataCollector:
         else:
             self.plugs = {}
             try:
-                pw_port = pw.Stick(port='COM7')
+                ports = self.serial_ports()
+                if isinstance(ports[0], serial.serialposix.Serial):
+                    pw_port = pw.Stick(port=ports[0].port)
+                else:
+                    pw_port = pw.Stick(port=ports[0])
             except SerialException:
                 print("couldnot connect to port")
             for i in self.plug_details:
