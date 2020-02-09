@@ -30,7 +30,7 @@
     </style>
     <script>
         function closeForm() {
-            $(':input:visible').attr('disabled', false);
+            $(':input:visible').not("[name=plugdevID], [name=new_plugID],[name=new_tempID],[name=new_pirID], [name=tempdevID], [name=pirdevID]").attr('disabled', false);
             document.getElementById("plugEditForm").style.display="none";
             document.getElementById("tempEditForm").style.display="none";
             document.getElementById("pirEditForm").style.display="none";
